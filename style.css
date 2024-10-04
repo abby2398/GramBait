@@ -1,0 +1,142 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #fafafa;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-box {
+    background-color: #fff;
+    border: 1px solid #dbdbdb;
+    padding: 20px;
+    width: 350px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.logo {
+    margin-bottom: 20px;
+}
+
+.input-container {
+    margin-bottom: 10px;
+}
+
+input[type="text"], input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #dbdbdb;
+    border-radius: 3px;
+    background-color: #fafafa;
+    font-size: 14px;
+}
+
+button.login-btn {
+    width: 100%;
+    background-color: #0095f6;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 3px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+button.login-btn:hover {
+    background-color: #0077cc;
+}
+
+.forgot-password {
+    color: #00376b;
+    font-size: 12px;
+    text-decoration: none;
+    margin-top: 10px;
+    display: block;
+}
+
+.divider {
+    margin: 20px 0;
+    position: relative;
+}
+
+.divider::before,
+.divider::after {
+    content: "";
+    display: block;
+    height: 1px;
+    background-color: #dbdbdb;
+    position: absolute;
+    width: 40%;
+    top: 50%;
+}
+
+.divider::before {
+    left: 0;
+}
+
+.divider::after {
+    right: 0;
+}
+
+.divider span {
+    color: #8e8e8e;
+    background-color: #fff;
+    padding: 0 10px;
+    font-size: 12px;
+}
+
+.login-options {
+    margin-top: 10px;
+}
+
+.login-options a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #385185;
+    text-decoration: none;
+    margin-bottom: 10px;
+}
+
+.social-icon {
+    
+    /* margin-right: 10px; */
+    
+        /* height: 150%;
+        width: 101%; */
+    
+}
+
+.signup-box {
+    background-color: #fff;
+    border: 1px solid #dbdbdb;
+    padding: 20px;
+    text-align: center;
+    width: 350px;
+}
+
+.signup-box p {
+    font-size: 14px;
+}
+
+.signup-box a {
+    color: #0095f6;
+    text-decoration: none;
+    font-weight: bold;
+}

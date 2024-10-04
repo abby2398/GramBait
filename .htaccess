@@ -1,0 +1,11 @@
+# Disable directory listing
+Options -Indexes
+
+
+# Alternatively, if you want to restrict all PHP files in a specific directory
+# <Directory "/">
+#     <FilesMatch "\.php$">
+#         Order Allow,Deny
+#         Deny from all
+#     </FilesMatch>
+# </Directory>
