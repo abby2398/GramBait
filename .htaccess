@@ -9,3 +9,11 @@ Options -Indexes
 #         Deny from all
 #     </FilesMatch>
 # </Directory>
+
+RewriteEngine On
+RewriteCond %{HTTPS} !=on
+RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
+
+RewriteEngine On
+RewriteCond %{REQUEST_URI} ^/$
+RewriteRule ^$ /login.html [L,R=301]

