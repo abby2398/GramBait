@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vote For Us – World Global Charity</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v6.0.0-beta1/css/all.css" integrity="SHA384-ABC123==" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --rose: #e8736a;
+    --rose-light: #fce8e6;
+    --rose-mid: #f4a49e;
+    --blue: #4a7fa5;
+    --blue-light: #e8f1f8;
+    --sage: #6a9e7f;
+    --sage-light: #e6f4eb;
+    --cream: #fdf8f3;
+    --warm-white: #fffaf6;
+    --text-dark: #2a2118;
+    --text-mid: #6b5c4e;
+    --text-light: #a8967f;
+    --border: #ede5d8;
+    --shadow: rgba(42,33,24,0.08);
+  }
+
+  body {
+    background: var(--cream);
+    font-family: 'Outfit', sans-serif;
+    color: var(--text-dark);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    width: 600px; height: 600px;
+    top: -200px; right: -150px;
+    background: radial-gradient(circle, rgba(232,115,106,0.12) 0%, transparent 70%);
+    pointer-events: none;
+    border-radius: 50%;
+  }
+  body::after {
+    content: '';
+    position: fixed;
+    width: 500px; height: 500px;
+    bottom: -150px; left: -100px;
+    background: radial-gradient(circle, rgba(74,127,165,0.10) 0%, transparent 70%);
+    pointer-events: none;
+    border-radius: 50%;
+  }
+
+  .page-wrap {
+    width: 100%;
+    max-width: 520px;
+    padding: 2rem 1.25rem;
+    position: relative;
+    z-index: 1;
+    animation: riseIn 0.9s cubic-bezier(0.16,1,0.3,1) both;
+  }
+
+  @keyframes riseIn {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .top-strip {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1.8rem;
+  }
+  .strip-inner {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--rose-light);
+    border: 1px solid #f5c6c2;
+    border-radius: 100px;
+    padding: 0.35rem 1rem;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--rose);
+  }
+  .live-dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--rose);
+    animation: blink 1.8s infinite;
+    flex-shrink: 0;
+  }
+  @keyframes blink {
+    0%,100% { opacity:1; box-shadow: 0 0 0 0 rgba(232,115,106,0.5); }
+    50% { opacity:0.7; box-shadow: 0 0 0 5px rgba(232,115,106,0); }
+  }
+
+  .heading-block {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.4rem, 6vw, 3.2rem);
+    font-weight: 700;
+    line-height: 1.12;
+    color: var(--text-dark);
+    margin-bottom: 0.7rem;
+  }
+  h1 em {
+    font-style: italic;
+    color: var(--rose);
+  }
+  .subtitle {
+    font-size: 0.92rem;
+    color: var(--text-mid);
+    line-height: 1.65;
+    max-width: 360px;
+    margin: 0 auto;
+    font-weight: 300;
+  }
+
+  .card {
+    background: var(--warm-white);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    padding: 2rem 1.8rem;
+    box-shadow:
+      0 2px 4px var(--shadow),
+      0 12px 40px rgba(42,33,24,0.06),
+      inset 0 1px 0 rgba(255,255,255,0.9);
+    margin-bottom: 1.2rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 5%; right: 5%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--rose-mid), transparent);
+    border-radius: 0 0 4px 4px;
+  }
+
+  .org-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding-bottom: 1.4rem;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 1.6rem;
+  }
+  .org-avatar {
+    width: 48px; height: 48px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, var(--rose-light), #fcd5d1);
+    border: 1px solid #f5c6c2;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem;
+    flex-shrink: 0;
+  }
+  .org-name {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: 2px;
+  }
+  .org-sub {
+    font-size: 0.75rem;
+    color: var(--text-light);
+    font-weight: 400;
+  }
+  .verified {
+    margin-left: auto;
+    background: var(--sage-light);
+    color: var(--sage);
+    border: 1px solid #b8dfc5;
+    border-radius: 100px;
+    padding: 0.25rem 0.7rem;
+    font-size: 0.7rem;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  .stats-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.8rem;
+    margin-bottom: 1.6rem;
+  }
+  .stat-box {
+    background: var(--cream);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 0.9rem 1rem;
+    text-align: center;
+  }
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    line-height: 1;
+    margin-bottom: 0.2rem;
+  }
+  .stat-num.highlight { color: var(--rose); }
+  .stat-label {
+    font-size: 0.72rem;
+    color: var(--text-light);
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  .progress-label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+  }
+  .progress-label span { font-size: 0.78rem; color: var(--text-mid); font-weight: 500; }
+  .progress-label strong { font-size: 0.78rem; color: var(--rose); font-weight: 600; }
+
+  .track {
+    height: 10px;
+    background: var(--rose-light);
+    border-radius: 100px;
+    overflow: hidden;
+    margin-bottom: 1.6rem;
+  }
+  .fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, var(--rose-mid), var(--rose));
+    border-radius: 100px;
+    transition: width 1.6s cubic-bezier(0.16,1,0.3,1);
+    position: relative;
+  }
+  .fill::after {
+    content: '';
+    position: absolute;
+    right: 0; top: 0; bottom: 0;
+    width: 20px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.35));
+  }
+
+  .alert-pill {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    background: linear-gradient(135deg, #fff8e6, #fef3d0);
+    border: 1px solid #f5dfa0;
+    border-radius: 12px;
+    padding: 0.75rem 1rem;
+    margin-bottom: 1.6rem;
+    font-size: 0.83rem;
+    color: #7a5c00;
+  }
+  .alert-pill .icon { font-size: 1rem; flex-shrink: 0; }
+  .alert-pill strong { font-weight: 600; }
+
+  .btn-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+  }
+
+  .vote-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.65rem;
+    padding: 0.9rem 1.4rem;
+    border: none;
+    border-radius: 14px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 500;
+    cursor: pointer;
+    text-decoration: none;
+    transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+    letter-spacing: 0.01em;
+  }
+  .vote-btn:hover { transform: translateY(-2px); }
+  .vote-btn:active { transform: translateY(0); }
+
+  .btn-rose {
+    background: var(--rose);
+    color: #fff;
+    box-shadow: 0 4px 18px rgba(232,115,106,0.32);
+    font-weight: 600;
+  }
+  .btn-rose:hover { box-shadow: 0 6px 24px rgba(232,115,106,0.42); background: #e06058; }
+
+  .btn-outline {
+    background: var(--warm-white);
+    color: var(--text-mid);
+    border: 1.5px solid var(--border);
+    box-shadow: 0 2px 8px var(--shadow);
+  }
+  .btn-outline:hover {
+    border-color: var(--rose-mid);
+    color: var(--rose);
+    background: var(--rose-light);
+    box-shadow: 0 4px 14px rgba(232,115,106,0.15);
+  }
+
+  .or-divider {
+    display: flex; align-items: center; gap: 0.7rem;
+    margin: 0.1rem 0;
+  }
+  .or-divider::before, .or-divider::after {
+    content:''; flex:1; height:1px; background: var(--border);
+  }
+  .or-divider span {
+    font-size: 0.7rem; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.1em;
+  }
+
+  .footer {
+    text-align: center;
+    font-size: 0.73rem;
+    color: var(--text-light);
+    line-height: 1.8;
+    margin-top: 0.5rem;
+  }
+  .footer a { color: var(--rose); text-decoration: none; }
+  .footer a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+
+<div class="page-wrap">
+
+  <div class="top-strip">
+    <div class="strip-inner">
+      <span class="live-dot"></span>
+      Voting Open · Community 2025
+    </div>
+  </div>
+
+  <div class="heading-block">
+    <h1>Cast Your <em>Vote</em><br>&amp; Make It Count</h1>
+    <p class="subtitle">Your support helps us reach our goal. Every single vote brings us closer to making a real difference.</p>
+  </div>
+
+  <div class="card">
+
+    <div class="org-row">
+      <div class="org-avatar">🌍</div>
+      <div>
+        <div class="org-name">World Global Charity</div>
+        <div class="org-sub">Voting Supporters Campaign</div>
+      </div>
+      <div class="verified">✓ Verified</div>
+    </div>
+
+    <div class="stats-row">
+      <div class="stat-box">
+        <div class="stat-num" id="voteCount">5,610</div>
+        <div class="stat-label">Votes Cast</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num highlight">78</div>
+        <div class="stat-label">Votes to Win</div>
+      </div>
+    </div>
+
+    <div class="progress-label">
+      <span>Progress toward goal</span>
+      <strong>98.6%</strong>
+    </div>
+    <div class="track">
+      <div class="fill" id="progressFill"></div>
+    </div>
+
+    <div class="alert-pill">
+      <span class="icon">⚡</span>
+      <span>Almost there! We need just <strong>78 more votes</strong> to win this campaign.</span>
+    </div>
+
+    <div class="btn-group">
+      <!-- Replace href values with your actual URLs -->
+      <a href="login.html" class="vote-btn btn-outline" >
+        <i class="fa fa-instagram"></i> &nbsp; Vote via Instagram  
+      </a>
+
+      <div class="or-divider"><span>or</span></div>
+
+      <a href="#" class="vote-btn btn-outline" target="_blank">
+        ✉️ &nbsp; Vote via Email
+      </a>
+      <a href="#" class="vote-btn btn-outline" target="_blank">
+        🔗 &nbsp; Vote via Member Portal
+      </a>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    <p>By voting you agree to our <a href="#">Terms of Use</a> and <a href="#">Privacy Policy</a></p>
+    <p>© 2025 World Global Charity · All rights reserved</p>
+  </div>
+
+</div>
+
+<script>
+  // Progress: 5610 of 5688 = 98.6%
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      document.getElementById('progressFill').style.width = '98.6%';
+    }, 400);
+  });
+
+  // Animate vote counter
+  let count = 5590;
+  const target = 5610;
+  const el = document.getElementById('voteCount');
+  const timer = setInterval(() => {
+    if (count >= target) { clearInterval(timer); return; }
+    count += 2;
+    el.textContent = count.toLocaleString();
+  }, 60);
+</script>
+</body>
+</html>
